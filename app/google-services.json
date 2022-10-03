@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "652852216186",
+    "firebase_url": "https://groupassignment-be15d-default-rtdb.firebaseio.com",
+    "project_id": "groupassignment-be15d",
+    "storage_bucket": "groupassignment-be15d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652852216186:android:099ccd0e7ea89075dad6c3",
+        "android_client_info": {
+          "package_name": "com.example.mobileappgroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652852216186-jsu2fqqrjp4cpbpirbktaa24req0fkun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvAyVDzcHG3bq7fHod0NIJ862T_jLhLlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652852216186-jsu2fqqrjp4cpbpirbktaa24req0fkun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

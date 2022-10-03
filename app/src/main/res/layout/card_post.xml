@@ -54,7 +54,7 @@
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="450dp"
-        android:fontFamily="@font/WildYouth"
+        android:fontFamily="font/wildyouth.otf"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat."
         android:textAlignment="center"
         android:textColor="#034c52"

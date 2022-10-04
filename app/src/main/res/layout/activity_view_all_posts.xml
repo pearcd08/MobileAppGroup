@@ -12,11 +12,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-
       >
 
         <ImageButton
-            android:id="@+id/imageButton_post_profilePic"
+            android:id="@+id/imageButton_profileCard_profilePic"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"

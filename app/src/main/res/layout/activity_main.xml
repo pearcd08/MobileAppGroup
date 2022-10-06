@@ -71,6 +71,15 @@
             android:layout_gravity="center"
             android:layout_marginTop="50sp"/>
 
+        <Button
+            android:id="@+id/btn_testCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Camera"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"/>
+
     </LinearLayout>
 
     <ProgressBar

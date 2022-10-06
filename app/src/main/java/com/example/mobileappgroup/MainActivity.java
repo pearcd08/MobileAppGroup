@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String loginId;
     private TextView tvPasswordReset;
     private EditText etEmailAddress, etPassword;
-    private Button signIn, register;
+    private Button signIn, register, testCamera;
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signIn = (Button) findViewById(R.id.btn_userLogin);
         signIn.setOnClickListener(this);
 
+        //you can delete this, just for testing
+        testCamera= (Button) findViewById(R.id.btn_testCamera);
+        testCamera.setOnClickListener(this);
+
         etEmailAddress = (EditText) findViewById(R.id.et_userEmail);
         etPassword = (EditText) findViewById(R.id.et_userPassword);
 
@@ -56,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userLogin();
         } else if (view.getId() == tvPasswordReset.getId()) {
             startActivity(new Intent(this, PasswordResetActivity.class));
+        }
+        else if (view.getId() == tvPasswordReset.getId()) {
+            startActivity(new Intent(this, PasswordResetActivity.class));
+        }
+        else if(view.getId() == testCamera.getId()){
+            startActivity(new Intent(this, UploadProfileImageActivity.class ));
         }
     }
 

@@ -4,24 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/post_background_gradiant"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@drawable/post_background_gradiant"
     tools:context=".UploadProfileImageActivity">
 
     <TextView
-        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:text="Set Profile Image"
         android:textAlignment="center"
-        android:textSize="32dp"/>
+        android:textSize="32dp" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        app:cardCornerRadius="140dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="5dp">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/img_uploadProfileImage_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_baseline_person"
+
+            />
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -29,53 +56,53 @@
             android:id="@+id/imgbtn_uploadProfileImage_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
             android:src="@drawable/ic_camera"
-            android:layout_marginRight="150dp"/>
+            android:backgroundTint="#0000"/>
+        <ImageButton
+            android:id="@+id/imgbtn_uploadProfileImage_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_capture"
+            android:backgroundTint="#0000"/>
 
         <ImageButton
             android:id="@+id/imgbtn_uploadProfileImage_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:src="@drawable/ic_image_gallery"
-            />
+            android:backgroundTint="#0000"/>
 
     </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/img_uploadProfileImage_image"
-        android:layout_width="225dp"
-        android:layout_height="225dp"
-        android:background="@drawable/profile_image_round"
-        android:backgroundTint="@color/black"
-        android:layout_marginTop="-25dp"
-
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+
         android:gravity="center"
         android:orientation="horizontal">
-
 
         <Button
             android:id="@+id/btn_uploadProfileImage_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
             android:backgroundTint="#C80D50"
-            android:text="Back"
-            android:layout_marginRight="100dp"/>
+            android:text="Back" />
 
         <Button
             android:id="@+id/btn_uploadProfileImage_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#C80D50"
-            android:text="Next"/>
+            android:text="Next" />
+
+
 
     </LinearLayout>
+
+
 
 
 

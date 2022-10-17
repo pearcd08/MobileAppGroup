@@ -2,15 +2,33 @@ package com.example.mobileappgroup.Models;
 
 public class User {
 
-    private String email, username;
+    private String UID, email, username, profileURL;
 
     public User() {
 
     }
 
-    public User(String email, String username) {
+    public User(String UID, String email, String username, String profileURL) {
+        this.UID = UID;
         this.email = email;
         this.username = username;
+        this.profileURL = profileURL;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public String getProfileURL() {
+        return profileURL;
+    }
+
+    public void setProfileURL(String profileURL) {
+        this.profileURL = profileURL;
     }
 
     public String getEmail() {

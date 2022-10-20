@@ -14,14 +14,16 @@
         android:layout_height="65dp"
       >
 
-        <ImageButton
-            android:id="@+id/imageButton_profileCard_profilePic"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileCard_profilePic"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/profile_image_round"/>
+            app:civ_border_width="2dp"
+            app:civ_border_overlay="true"
+            app:civ_border_color="#FF000000"/>
 
         <TextView
             android:id="@+id/textView_post_username"
@@ -50,14 +52,13 @@
             android:layout_marginLeft="330dp"
             android:layout_marginTop="15dp"/>
 
-
-
-
-
-
     </androidx.cardview.widget.CardView>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
 

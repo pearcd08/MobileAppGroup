@@ -20,7 +20,8 @@
         <entry key="app/src/main/res/layout/activity_new_post.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_upload_profile_image.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_view_all_posts.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_all_posts.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card_post.xml" value="0.1" />
       </map>
     </option>
   </component>

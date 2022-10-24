@@ -36,6 +36,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity
+            android:name=".ConfirmPost"
+            android:exported="false" />
+        <activity
+            android:name=".NewPost2nd"
+            android:exported="false" />
+        <activity
             android:name=".UploadProfileImageActivity"
             android:exported="false">
             <meta-data

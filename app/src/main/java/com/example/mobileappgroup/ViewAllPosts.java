@@ -1,6 +1,8 @@
 package com.example.mobileappgroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,24 +10,31 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ViewAllPosts extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_userName;
-    private ImageButton imgBtn_profilePic, imgBtn_newPost, imgBtn_editProfile;
+    private ImageButton imgBtn_newPost, imgBtn_editProfile;
+    private CircleImageView profilePic;
+    private RecyclerView recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_posts);
 
-        imgBtn_profilePic = findViewById(R.id.imageButton_profileCard_profilePic);
-        imgBtn_profilePic.setOnClickListener(this);
+        profilePic = findViewById(R.id.profileCard_profilePic);
+        profilePic.setOnClickListener(this);
 
         imgBtn_editProfile = findViewById(R.id.imageButton_profileCard_editProfile);
         imgBtn_editProfile.setOnClickListener(this);
 
         imgBtn_newPost = findViewById(R.id.imageButton_profileCard_newPost);
         imgBtn_newPost.setOnClickListener(this);
+
+        recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -40,7 +49,7 @@ public class ViewAllPosts extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageButton_profileCard_profilePic:
+            case R.id.profileCard_profilePic:
                 //open users posts
                 break;
             case R.id.imageButton_profileCard_newPost:

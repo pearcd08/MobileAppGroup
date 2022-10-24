@@ -9,14 +9,16 @@
     app:cardElevation="@dimen/cardview_compat_inset_shadow">
 
 
-    <ImageButton
-        android:id="@+id/imageButton_post_profilePic"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/post_profilePic"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/profile_image_round" />
+        app:civ_border_width="1dp"
+        app:civ_border_overlay="true"
+        app:civ_border_color="#FF000000" />
 
     <TextView
         android:id="@+id/textView_post_username"

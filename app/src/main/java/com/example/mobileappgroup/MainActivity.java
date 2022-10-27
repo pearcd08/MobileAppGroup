@@ -76,15 +76,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             reload();
+        } else {
         }
     }
 
 
     private void userLogin() {
-        String email = etEmailAddress.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        //String email = "ye@gmail.com";
-        //String password = "123456";
+        //String email = etEmailAddress.getText().toString().trim();
+        //String password = etPassword.getText().toString().trim();
+        String email = "test3@gmail.com";
+        String password = "123456";
         if (email.isEmpty()) {
             etEmailAddress.setError("Please enter the email address");
             etEmailAddress.requestFocus();

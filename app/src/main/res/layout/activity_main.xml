@@ -4,81 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/post_background_gradiant"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30sp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Sign up" />
+        android:layout_marginTop="30sp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please log in:"
             android:layout_marginTop="30sp"
-            />
+            android:fontFamily="@font/wildyouthfont"
+            android:text="On Loc"
+            android:textColor="#C80D50"
+            android:textSize="100sp" />
 
-        <EditText
-            android:id="@+id/et_userEmail"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="-10sp"
+            android:text="Please log in:"
+            android:textColor="#C80D50"
+            android:textStyle="italic" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Email address"
-            android:inputType="textEmailAddress"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_userPassword"
+            <ImageView
+                android:layout_width="36sp"
+                android:layout_height="36sp"
+                android:src="@drawable/ic_email" />
+
+
+            <EditText
+                android:id="@+id/et_userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/white"
+                android:hint="  Email address"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton_showPassword"
+                android:layout_width="36sp"
+                android:layout_height="36sp"
+                android:background="#0000"
+                android:src="@drawable/ic_eye"
+                android:tooltipText="Show Password" />
+
+
+            <EditText
+                android:id="@+id/et_userPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="50sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+
+                android:background="@color/white"
+                android:hint="  Password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25sp">
+
+            <Button
+                android:id="@+id/btn_userLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50sp"
+                android:width="110sp"
+                android:backgroundTint="#C80D50"
+                android:text="Login"
+                android:textSize="16sp" />
+
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="110sp"
+                android:backgroundTint="#C80D50"
+                android:text="Sign up"
+                android:textSize="16sp"
+
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_passwordReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
+            android:layout_marginTop="25dp"
             android:text="Forgot password?"
-            android:layout_marginRight="50dp"
-            />
+            android:textColor="#C80D50"
+            android:textStyle="italic" />
 
-
-        <Button
-            android:id="@+id/btn_userLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="50sp"/>
-
-        <Button
-            android:id="@+id/btn_testCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test Camera"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="50sp"/>
 
     </LinearLayout>
 

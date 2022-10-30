@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ViewAllPosts extends AppCompatActivity implements View.OnClickListener {
+public class ViewAllPosts extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener  {
 
     private TextView tv_userName;
     private ImageButton imgBtn_newPost, imgBtn_editProfile;
@@ -119,7 +121,7 @@ public class ViewAllPosts extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.imageButton_profileCard_editProfile:
                 //open edit profile
-                openEditProfile();
+                showMenu(view);
                 break;
 
         }
@@ -131,7 +133,22 @@ public class ViewAllPosts extends AppCompatActivity implements View.OnClickListe
     }
 
     private void openEditProfile() {
-        Intent i = new Intent(this, EditProfile.class);
+        //Intent i = new Intent(this, EditProfile.class);
+        Intent i = new Intent(this, UploadProfileImageActivity.class);
+        startActivity(i);
+    }
+
+    private void showMenu(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.profile_menu);
+        popup.show();
+
+    }
+
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
@@ -147,5 +164,20 @@ public class ViewAllPosts extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         super.onStop();
         allPostsAdapter.stopListening();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_updateProfile:
+                openEditProfile();
+                return true;
+            case R.id.menu_logout:
+                logout();
+                return true;
+            default:
+                return false;
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mobileappgroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,9 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mobileappgroup.Models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
-public class ConfirmPost extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
+
+public class ConfirmPost extends AppCompatActivity implements View.OnClickListener {
 
     String imageUri;
     String caption;
@@ -22,6 +29,11 @@ public class ConfirmPost extends AppCompatActivity implements View.OnClickListen
     TextView tv_confirmPost_Location, tv_confirmPost_Username, tv_confirmPost_Caption;
     ImageView img_confirmPost_Photo;
     Button btn_confirmPost_back, btn_confirmPost_post;
+    double longitude;
+    double latitude;
+    FirebaseAuth firebaseAuth;
+    UserDAO userDAO = new UserDAO();
+    User user = new User();
 
 
     @Override
@@ -33,9 +45,15 @@ public class ConfirmPost extends AppCompatActivity implements View.OnClickListen
         imageUri = intent.getStringExtra("Image Uri");
         caption = intent.getStringExtra("Caption");
         location = intent.getStringExtra("Location");
+        longitude = intent.getDoubleExtra("Longitude", 0);
+        latitude = intent.getDoubleExtra("Latitude", 0);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseAuth = FirebaseAuth.getInstance();
         userID = firebaseAuth.getCurrentUser().toString();
+
+        getUser();
+Log.d("LINE_INFO", "hit line 56");
         Log.d("CURRENT_USER", userID);
         tv_confirmPost_Username = findViewById(R.id.tv_confirmPost_Username);
         tv_confirmPost_Location = findViewById(R.id.tv_confirmPost_Location);
@@ -44,7 +62,7 @@ public class ConfirmPost extends AppCompatActivity implements View.OnClickListen
         btn_confirmPost_back = findViewById(R.id.btn_confirmPost_back);
         btn_confirmPost_post = findViewById(R.id.btn_confirmPost_post);
 
-        tv_confirmPost_Username.setText(userID);
+        tv_confirmPost_Username.setText(user.getUsername());
         tv_confirmPost_Location.setText(location);
         tv_confirmPost_Caption.setText(caption);
         img_confirmPost_Photo.setImageURI(Uri.parse(imageUri));
@@ -53,12 +71,33 @@ public class ConfirmPost extends AppCompatActivity implements View.OnClickListen
         btn_confirmPost_post.setOnClickListener(this);
     }
 
+    private void getUser() {
+        Log.d("LINE_INFO", "hit line 75");
+        userDAO.get().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    User tempUser = data.getValue(User.class);
+                    if (tempUser.getUID().equals(userID)) {
+                        user = tempUser;
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
-        if (view.getId() == btn_confirmPost_back.getId()){
+        if (view.getId() == btn_confirmPost_back.getId()) {
             finish();
-        }
-        else if (view.getId() == btn_confirmPost_post.getId()){
+        } else if (view.getId() == btn_confirmPost_post.getId()) {
 
         }
 

@@ -1,13 +1,20 @@
 package com.example.mobileappgroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,6 +33,7 @@ public class NewPost extends AppCompatActivity implements View.OnClickListener{
     int SELECT_PICTURE = 200;
     // For camera
     private static final int TAKE_PICTURE = 123;
+    private static final int CAMERA_PERMISSION_REQUEST = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +73,58 @@ public class NewPost extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void imageTaker(){
+        // Get permission for accessing the camera
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            getCameraPermission();
+        }
+        else {
+            // we don't need permissions from the user for earlier versions.
+            // Create the camera intent to open the camera and capture the image.
+            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera_intent, TAKE_PICTURE);
+        }
         // Create the camera intent to open the camera and capture the image.
-        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Start activity, and pass through pic_id to compare with the returned request code.
-        startActivityForResult(camera_intent, TAKE_PICTURE);
 
+    }
+
+    // Asks for the permission and turns on camera.
+    private void getCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(camera_intent, TAKE_PICTURE);
+        }
+        else {
+            // ask for permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST);
+        }
+    }
+
+    // Handles the result of asking for the permission.
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case CAMERA_PERMISSION_REQUEST:
+                for (int i = 0; i < permissions.length; i++){
+                    String permission = permissions[i];
+                    if (grantResults[i] == PackageManager.PERMISSION_DENIED){
+                        boolean showRationale = ActivityCompat
+                                .shouldShowRequestPermissionRationale(this,
+                                        Manifest.permission.CAMERA);
+                        if(showRationale){
+                            Log.d("PERMISSION_DENIED", "Camera permission denied once or more.");
+                        }
+                        else {
+                            Log.d("PERMISSION_DENIED", "Never ask for Camera permission again.");
+                        }
+                    }
+                    else{
+                        getCameraPermission();
+                    }
+                }
+        }
     }
 
     private void imageChooser() {

@@ -19,7 +19,7 @@ public class ViewAllPosts_Holder extends RecyclerView.ViewHolder {
         txt_userName = itemView.findViewById(R.id.textView_post_username);
         txt_location = itemView.findViewById(R.id.textView_post_location);
         txt_blurb = itemView.findViewById(R.id.textView_post_blurb);
-        imgBtn_profilePic = itemView.findViewById(R.id.imageButton_post_profilePic);
+        imgBtn_profilePic = itemView.findViewById(R.id.post_profilePic);
         img_photo = itemView.findViewById(R.id.imageview_post_image);
     }
 }

@@ -4,11 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String loginId;
     private TextView tvPasswordReset;
     private EditText etEmailAddress, etPassword;
-    private Button signIn, register, testCamera;
+    private Button signIn, register;
+    private ImageButton showPassword;
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
@@ -40,11 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvPasswordReset.setOnClickListener(this);
         signIn = (Button) findViewById(R.id.btn_userLogin);
         signIn.setOnClickListener(this);
+        showPassword = (ImageButton) findViewById(R.id.imageButton_showPassword);
+        showPassword.setOnClickListener(this);
 
         //you can delete this, just for testing
-        testCamera= (Button) findViewById(R.id.btn_testCamera);
-        testCamera.setOnClickListener(this);
-
         etEmailAddress = (EditText) findViewById(R.id.et_userEmail);
         etPassword = (EditText) findViewById(R.id.et_userPassword);
 
@@ -64,9 +70,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view.getId() == tvPasswordReset.getId()) {
             startActivity(new Intent(this, PasswordResetActivity.class));
         }
-        else if(view.getId() == testCamera.getId()){
-            startActivity(new Intent(this, UploadProfileImageActivity.class ));
+        else if(view.getId() == showPassword.getId()){
+            if (etPassword.getTransformationMethod()
+                    .equals(HideReturnsTransformationMethod.getInstance())){
+                etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+
+            }else{
+                etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+
+
+
         }
+
     }
 
     @Override
@@ -76,15 +93,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             reload();
+        } else {
         }
     }
 
 
     private void userLogin() {
-        String email = etEmailAddress.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        //String email = "ye@gmail.com";
-        //String password = "123456";
+        //String email = etEmailAddress.getText().toString().trim();
+        //String password = etPassword.getText().toString().trim();
+        String email = "test3@gmail.com";
+        String password = "123456";
         if (email.isEmpty()) {
             etEmailAddress.setError("Please enter the email address");
             etEmailAddress.requestFocus();

@@ -11,7 +11,6 @@
         <entry key="..\:/AndroidApps/MobileAppGroup/app/src/main/res/layout/activity_view_all_posts.xml" value="0.35833333333333334" />
         <entry key="..\:/AndroidApps/MobileAppGroup/app/src/main/res/layout/card_post.xml" value="0.35833333333333334" />
         <entry key="..\:/AndroidApps/MobileAppGroup/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3405" />
-<<<<<<< Updated upstream
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/drawable/et_rounded_edge_background.xml" value="0.1145" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/drawable/et_single_line.xml" value="0.1145" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/drawable/post_background_gradiant.xml" value="0.1145" />
@@ -24,17 +23,18 @@
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/activity_upload_profile_image.xml" value="0.22327898550724637" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/activity_view_all_posts.xml" value="0.11980749746707194" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/card_post.xml" value="0.11980749746707194" />
-=======
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/activity_confirm_post.xml" value="0.11041666666666666" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/activity_view_all_posts.xml" value="0.11041666666666666" />
         <entry key="..\:/Users/annam/Documents/GitHub/MobileAppGroup/app/src/main/res/layout/card_post.xml" value="0.11041666666666666" />
->>>>>>> Stashed changes
+        <entry key="app/src/main/res/layout/activity_confirm_post.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_new_post.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_view_all_posts.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_upload_profile_image.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_view_all_posts.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card_post.xml" value="0.1" />
       </map>
     </option>
   </component>

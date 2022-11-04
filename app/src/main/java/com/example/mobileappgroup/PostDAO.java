@@ -11,7 +11,7 @@ public class PostDAO {
 
     public PostDAO() {
         firebaseDatabase = FirebaseDatabase.getInstance("https://groupassignment-be15d-default-rtdb.firebaseio.com/");
-        databaseReference = firebaseDatabase.getReference("Post");
+        databaseReference = firebaseDatabase.getReference("Posts");
     }
 
     public Task<Void> add (Post post){

@@ -9,55 +9,15 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <androidx.cardview.widget.CardView
+    <include
+        layout="@layout/user_nav_bar"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-      >
-
-        <ImageButton
-            android:id="@+id/imageButton_profileCard_profilePic"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/profile_image_round"/>
-
-        <TextView
-            android:id="@+id/textView_post_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="22dp"
-            android:text="UserName"
-            android:textColor="#034c52"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/imageButton_profileCard_newPost"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@mipmap/add_post_icon"
-            android:layout_marginLeft="370dp"
-            android:layout_marginTop="15dp"/>
-
-        <ImageButton
-            android:id="@+id/imageButton_profileCard_editProfile"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@mipmap/edit_profile_icon"
-            android:layout_marginLeft="330dp"
-            android:layout_marginTop="15dp"/>
-
-
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
-
+        android:layout_height="wrap_content"
+        />
 
 
 

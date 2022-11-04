@@ -73,6 +73,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         String email = userEmail.getText().toString().trim();
         String username = userName.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
+        String UID = "";
+        String profileURL = "";
 
         if (email.isEmpty()) {
             userEmail.setError("Please enter the email address");
@@ -117,17 +119,22 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                         if (task.isSuccessful()) {
 
-                            User user = new User(email, username);
+                            User user = new User(UID, email, username, profileURL);
 
                             FirebaseDatabase.getInstance().getReference("Users")
-                                    //.child(mAuth.getCurrentUser().getUid())
-                                    .child(username)
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    //.child(username)
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
+                                            FirebaseDatabase.getInstance().getReference("Users")
+                                                    .child(mAuth.getCurrentUser().getUid().toString());
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(RegistrationActivity.this,"User has been registered successfully!", Toast.LENGTH_LONG).show();
                                                 FirebaseUser uUser = mAuth.getCurrentUser();
+                                                String stringUser = uUser.getUid();
+                                                System.out.println("test-userkey" + stringUser);
+                                                //Toast.makeText(RegistrationActivity.this, "Successfully.", Toast.LENGTH_SHORT).show();
                                                 updateUI(uUser);
                                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                                             } else {

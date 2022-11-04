@@ -1,15 +1,16 @@
 package com.example.mobileappgroup.Models;
 
 public class Post {
-<<<<<<< Updated upstream
-=======
+
 
     private String username, userID, location, blurb, imageURL, profileURL;
     Double longitude, latitude;
 
+
     public Post() {
 
     }
+
 
     public Post(String username, String userID, String location, String blurb, String postImageURL, String profileURL, Double longitude, Double latitude) {
         this.username = username;
@@ -85,5 +86,5 @@ public class Post {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
->>>>>>> Stashed changes
+
 }

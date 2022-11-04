@@ -147,6 +147,7 @@ public class NewPost extends AppCompatActivity implements View.OnClickListener{
                 if (null != selectedImageUri){
                     // update the image in the layout.
                     imageview_post_image.setImageURI(selectedImageUri);
+                    imageview_post_image.setBackgroundColor(0);
                 }
             }
             else if (requestCode == TAKE_PICTURE){
@@ -155,6 +156,7 @@ public class NewPost extends AppCompatActivity implements View.OnClickListener{
                 selectedImageUri = data.getData();
                 // update the image in the layout
                 imageview_post_image.setImageBitmap(photo);
+                imageview_post_image.setBackgroundColor(0);
                 selectedImageUri = getImageUri(getApplicationContext(), photo);
             }
         }

@@ -58,7 +58,7 @@ public class LocationControllerRESTAPI implements retrofit2.Callback<Location> {
                 locationDescription.append(location.getState()).append(", ");
             }
             if (location.getCountry() != null){
-                locationDescription.append(location.getCountry()).append(", ");
+                locationDescription.append(location.getCountry());
             }
             textview.setText(locationDescription);
 

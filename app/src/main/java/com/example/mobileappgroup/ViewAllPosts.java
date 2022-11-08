@@ -72,11 +72,14 @@ public class ViewAllPosts extends AppCompatActivity implements View.OnClickListe
 
     private void loadUser(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        //String uID = currentUser.getUid();
+        String uID = currentUser.getUid();
+        //System.out.println("test-id" + uID);
         String email = currentUser.getEmail();
         //System.out.println("test-email" + email);
 
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

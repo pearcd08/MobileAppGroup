@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAllPosts_Holder extends RecyclerView.ViewHolder {
-    public TextView txt_userName, txt_location, txt_blurb;
+    public TextView txt_userName, txt_location, txt_blurb, txt_option;
     public CircleImageView civ_profilePic;
     public ImageView img_photo;
 
@@ -23,5 +23,6 @@ public class ViewAllPosts_Holder extends RecyclerView.ViewHolder {
         txt_blurb = itemView.findViewById(R.id.textView_post_blurb);
         civ_profilePic = itemView.findViewById(R.id.post_profilePic);
         img_photo = itemView.findViewById(R.id.imageview_post_image);
+        txt_option = itemView.findViewById(R.id.txt_option);
     }
 }

@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mobileappgroup">
 
-<<<<<<< Updated upstream
-=======
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
->>>>>>> Stashed changes
 
     <uses-feature android:name="android.hardware.camera" />
 

@@ -3,17 +3,18 @@ package com.example.mobileappgroup.Models;
 import com.google.firebase.database.Exclude;
 
 public class Post {
-<<<<<<< Updated upstream
-=======
+
 
     private String username, userID, location, blurb, imageURL, profileURL;
     Double longitude, latitude;
     @Exclude
     private String postID;
 
+
     public Post() {
 
     }
+
 
     public Post(String username, String userID, String location, String blurb, String postImageURL, String profileURL, Double longitude, Double latitude) {
         this.username = username;
@@ -89,9 +90,6 @@ public class Post {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
@@ -104,5 +102,5 @@ public class Post {
     public void setPostID(String postID) {
         this.postID = postID;
     }
->>>>>>> Stashed changes
+
 }

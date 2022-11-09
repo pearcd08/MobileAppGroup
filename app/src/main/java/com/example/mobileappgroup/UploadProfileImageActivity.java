@@ -21,7 +21,10 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.LifecycleOwner;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -40,11 +43,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.yalantis.ucrop.UCrop;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -61,6 +81,10 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
     PreviewView previewView;
     ImageCapture imageCapture;
     ProcessCameraProvider cameraProvider;
+    TextView tvuserName;
+
+
+    private String userName, userProfile, userEmail;
 
     public static final int GALLERY_CODE = 1;
     public static final String SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImg";
@@ -70,6 +94,13 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private Executor executor = Executors.newSingleThreadExecutor();
 
+    //Firebase
+
+    Uri imageURI;
+    StorageReference storageRef;
+    ProgressDialog progressDialog;
+    String uploadedImageURL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +109,8 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
 
         imgProfilePic = (ImageView) findViewById(R.id.img_uploadProfileImage_image);
         previewView = (PreviewView) findViewById(R.id.preview_camera);
+
+
 
         btnNext = (Button) findViewById(R.id.btn_uploadProfileImage_next);
         btnBack = (Button) findViewById(R.id.btn_uploadProfileImage_back);
@@ -91,16 +124,20 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
         imgbtnCamera.setOnClickListener(this);
         imgbtnGallery.setOnClickListener(this);
         imgbtnCapture.setOnClickListener(this);
+
+        loadUser();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == btnNext.getId()) {
-            // confirm image is uploaded
-            // create user on firebase
+            uploadImage();
         }
         if (view.getId() == btnBack.getId()) {
-            //go back to registration step 2
+            //this.finish();
+            Intent i = new Intent(this, ViewAllPosts.class);
+            startActivity(i);
+
         }
         if (view.getId() == imgbtnCamera.getId()) {
             //open camera intent
@@ -115,6 +152,41 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
         }
 
     }
+
+    private void loadUser() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //String uID = currentUser.getUid();
+        userEmail = currentUser.getEmail();
+        //System.out.println("test-email" + email);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("email").getValue().equals(userEmail)) {
+                        userName = ds.child("username").getValue(String.class);
+                        System.out.println("test-name" + userName);
+                        userProfile = ds.child("profileURL").getValue(String.class);
+
+                    }
+                    Glide.with(imgProfilePic.getContext())
+                            .load(userProfile)
+                            .into(imgProfilePic);
+
+
+                }
+            }
+
+
+        @Override
+        public void onCancelled (@NonNull DatabaseError error){
+            Toast.makeText(UploadProfileImageActivity.this, "Something wrong happens", Toast.LENGTH_LONG).show();
+        }
+    });
+
+}
 
     private void cameraPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -217,7 +289,6 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        Toast.makeText(UploadProfileImageActivity.this, "Photo has been saved successfully.", Toast.LENGTH_SHORT).show();
                         Uri cameraUri = outputFileResults.getSavedUri();
                         Bitmap cameraBitmap = null;
 
@@ -236,12 +307,14 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
                         }
                         Bitmap mutableBitmap = cameraBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
-                        Bitmap scaledImage = scaleBitmap(mutableBitmap);
+                        Bitmap scaledBitmap = scaleBitmap(mutableBitmap);
                         cameraProvider.unbindAll();
                         imgbtnCapture.setVisibility(View.INVISIBLE);
                         previewView.setVisibility(View.INVISIBLE);
                         imgProfilePic.setVisibility(View.VISIBLE);
-                        imgProfilePic.setImageBitmap(scaledImage);
+                        imgProfilePic.setImageBitmap(scaledBitmap);
+                        imageURI = getImageUri(UploadProfileImageActivity.this, scaledBitmap);
+
 
                     }
 
@@ -258,7 +331,11 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
 
     private void openGallery() {
 
-        cameraProvider.unbindAll();
+        if (cameraProvider != null) {
+            cameraProvider.unbindAll();
+        }
+
+
         imgProfilePic.setVisibility(View.VISIBLE);
         startActivityForResult(new Intent().setAction(Intent.ACTION_GET_CONTENT)
                 .setType("image/*"), GALLERY_CODE);
@@ -291,7 +368,12 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
                 if (imageUriResultCrop != null) {
 
                     imgProfilePic.setImageURI(imageUriResultCrop);
-                    Toast.makeText(this, "CROPPED", Toast.LENGTH_SHORT).show();
+                    imageURI = imageUriResultCrop;
+
+                    Toast.makeText(this, "URI SET", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "CROP ERROR", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -333,6 +415,7 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
 
     public Bitmap scaleBitmap(Bitmap cameraBitmap) {
 
+
         float xScale = (float) 200 / 480;
         float yScale = (float) 200 / 640;
         float scale = Math.max(xScale, yScale);
@@ -356,9 +439,96 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
         matrix.preScale(-1.0f, 1.0f);
         Bitmap flippedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
                 scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, false);
-
+        Toast.makeText(this, "SCALED", Toast.LENGTH_SHORT).show();
         return flippedBitmap;
+    }
+
+    public Uri getImageUri(Context context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "BitmapUri", null);
+        return Uri.parse(path);
+    }
+
+    private void uploadImage() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading image...");
+        progressDialog.show();
+
+        String imageName = userName + "_PROFILEIMAGE";
+        storageRef = FirebaseStorage.getInstance().getReference(imageName);
+        storageRef.putFile(imageURI)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                                Uri downloadUrl = uri;
+                                uploadedImageURL = downloadUrl.toString();
+                                updateProfile();
+                            }
+                        });
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+
+                        Toast.makeText(UploadProfileImageActivity.this,
+                                "Profile Image Failed To Upload", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    private void updateProfile() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("email").getValue().equals(userEmail)) {
+                        ds.child("profileURL").getRef().setValue(uploadedImageURL).addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                Toast.makeText(UploadProfileImageActivity.this, "Profile Successfully Updated",
+                                        Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        });
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UploadProfileImageActivity.this, "Something wrong happens", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
 
 }
+
+
+
+
+
+
+
+

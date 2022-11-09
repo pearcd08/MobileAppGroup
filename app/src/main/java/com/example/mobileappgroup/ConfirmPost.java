@@ -165,6 +165,7 @@ Log.d("LINE_INFO", "hit line 56");
         post.setLongitude(longitude);
         post.setLatitude(latitude);
         post.setPostImageURL(url);
+        post.setProfileURL(user.getProfileURL());
         PostDAO postDAO = new PostDAO();
         postDAO.add(post);
     }

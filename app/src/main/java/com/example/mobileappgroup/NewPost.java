@@ -28,7 +28,6 @@ public class NewPost extends AppCompatActivity implements View.OnClickListener{
     ImageView imageview_post_image;
     Button btn_newPost_back, btn_newPost_next;
     Uri selectedImageUri;
-    String userID;
     // For gallery
     int SELECT_PICTURE = 200;
     // For camera

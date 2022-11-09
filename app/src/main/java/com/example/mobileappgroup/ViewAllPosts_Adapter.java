@@ -48,13 +48,6 @@ public class ViewAllPosts_Adapter extends FirebaseRecyclerAdapter<Post, ViewAllP
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewAllPosts_Holder holder, int position) {
-        //holder.txt_userName.setText =
-        //holder.txt_location.setText =
-        //holder.txt_blurb.setText =
-        //holder.imgBtn_profilePic.setImageURI();
-        //holder.img_photo.setImageURI();
-
     protected void onBindViewHolder(@NonNull ViewAllPosts_Holder holder, int position, @NonNull Post model) {
         holder.txt_userName.setText(model.getUsername());
         holder.txt_location.setText(model.getLocation());

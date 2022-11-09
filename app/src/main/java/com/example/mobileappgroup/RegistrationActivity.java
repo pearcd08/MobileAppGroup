@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -27,7 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button login, register;
+    private Button login, register, back;
+    private ImageButton showPassword;
     private EditText userEmail, userName, userPassword;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -38,10 +43,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        login = (Button) findViewById(R.id.btn_login);
+
         register = (Button) findViewById(R.id.btn_userRegister);
-        login.setOnClickListener(this);
+        back = (Button) findViewById(R.id.btn_userregister_back);
+       showPassword = (ImageButton) findViewById(R.id.btn_userRegister_showpassword);
+
         register.setOnClickListener(this);
+        back.setOnClickListener(this);
+        showPassword.setOnClickListener(this);
 
         userEmail = (EditText) findViewById(R.id.et_userEmail);
         userName = (EditText) findViewById(R.id.et_username);
@@ -53,12 +62,23 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == login.getId()) {
-            startActivity(new Intent(this, MainActivity.class));
-        }
-        else {
+        if (view.getId() == register.getId()) {
             registerUser();
         }
+        if (view.getId() == back.getId()) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        if (view.getId() == showPassword.getId()) {
+            if (userPassword.getTransformationMethod()
+                    .equals(HideReturnsTransformationMethod.getInstance())) {
+                userPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+
+            } else {
+                userPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+        }
+
     }
 
     // [START on_start_check_user]
@@ -67,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             reload();
         }
     }
@@ -107,7 +127,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             return;
         }
 
-        if (password.length() <4 || password.length() > 8) {
+        if (password.length() < 4 || password.length() > 8) {
             userPassword.setError("Please provide password between 4 and 8 character");
             userPassword.requestFocus();
             return;
@@ -143,7 +163,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                                         FirebaseDatabase.getInstance().getReference("Users")
                                                                 .child(mAuth.getCurrentUser().getUid().toString());
                                                         if (task.isSuccessful()) {
-                                                            Toast.makeText(RegistrationActivity.this,"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(RegistrationActivity.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                                             FirebaseUser uUser = mAuth.getCurrentUser();
                                                             String stringUser = uUser.getUid();
                                                             System.out.println("test-userkey" + stringUser);
@@ -175,13 +195,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         });
 
 
-
-
     }
 
 
-
-    private void reload() { }
+    private void reload() {
+    }
 
     private void updateUI(FirebaseUser uUser) {
 

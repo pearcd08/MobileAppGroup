@@ -4,52 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/post_background_gradiant"
+    android:orientation="vertical"
     tools:context=".NewPost2nd">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/wildyouthfont"
         android:text="@string/new_post"
         android:textAlignment="center"
-        android:textStyle="italic"
-        android:fontFamily="sans-serif-black"
-        android:textSize="36sp"
-        android:textColor="@color/dark_teal"/>
+        android:textColor="#C80D50"
+        android:textSize="64sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_newPost2_location"
             android:layout_width="300dp"
-             android:layout_height="wrap_content"
-            android:hint="Enter Location"
+            android:layout_height="wrap_content"
             android:background="@drawable/et_rounded_edge_background"
             android:backgroundTint="@color/white"
+            android:hint="Enter Location"
             android:padding="5dp"
-            android:textSize="18sp"
-            android:textColor="@color/dark_teal"/>
+            android:textColor="@color/dark_teal"
+            android:textSize="18sp" />
+
         <ImageView
             android:id="@+id/btn_newPost2_locationPointer"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_location_on_24"/>
+            android:src="@drawable/ic_baseline_location_on_24" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/caption"
-    android:textSize="24sp"
-    android:textColor="@color/dark_teal"
-    android:layout_marginHorizontal="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/caption"
+            android:textColor="#C80D50"
+            android:textSize="24sp" />
+
         <EditText
             android:id="@+id/et_newPost2_caption"
             android:layout_width="match_parent"
@@ -58,11 +62,12 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/et_rounded_edge_background"
             android:backgroundTint="@color/white"
-            android:hint="@string/type_caption"
             android:gravity="top"
-            android:padding="5dp"/>
+            android:hint="@string/type_caption"
+            android:padding="5dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,16 +80,16 @@
             android:id="@+id/btn_newPost2_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
             android:backgroundTint="#C80D50"
-            android:text="Back"
-            android:layout_marginRight="100dp"/>
+            android:text="Back" />
 
         <Button
             android:id="@+id/btn_newPost2_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#C80D50"
-            android:text="Next"/>
+            android:text="Next" />
 
     </LinearLayout>
 </LinearLayout>

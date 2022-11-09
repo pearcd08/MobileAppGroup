@@ -8,7 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="2dp">
+        app:cardElevation="2dp"
+        android:backgroundTint="#FFC80D50">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="65dp"
@@ -26,16 +27,16 @@
                 android:layout_marginTop="8dp"
                 app:civ_border_width="2dp"
                 app:civ_border_overlay="true"
-                app:civ_border_color="#FF000000"/>
+                app:civ_border_color="@color/white"/>
 
             <TextView
                 android:id="@+id/textView_post_username"
-                android:layout_width="200sp"
+                android:layout_width="180sp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="22dp"
                 android:text="UserName"
-                android:textColor="#034c52"
+                android:textColor="@color/white"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -43,17 +44,19 @@
                 android:id="@+id/imageButton_profileCard_newPost"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@mipmap/add_post_icon"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"/>
+                android:src="@drawable/ic_baseline_add_24"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#0000"/>
 
             <ImageButton
                 android:id="@+id/imageButton_profileCard_editProfile"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@mipmap/edit_profile_icon"
+                android:src="@drawable/ic_baseline_person_white"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#0000"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

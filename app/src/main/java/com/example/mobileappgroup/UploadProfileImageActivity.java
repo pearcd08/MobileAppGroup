@@ -67,8 +67,6 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
     PreviewView previewView;
     ImageCapture imageCapture;
     ProcessCameraProvider cameraProvider;
-    TextView tvuserName;
-
 
     private String userName, userProfile, userEmail;
 
@@ -140,41 +138,42 @@ public class UploadProfileImageActivity extends AppCompatActivity implements Vie
 
     }
 
-    private void loadUser() {
+    private void loadUser(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        //String uID = currentUser.getUid();
-        userEmail = currentUser.getEmail();
+        String uID = currentUser.getUid();
+        //System.out.println("test-id" + uID);
+        String email = currentUser.getEmail();
         //System.out.println("test-email" + email);
 
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (ds.child("email").getValue().equals(userEmail)) {
-                        userName = ds.child("username").getValue(String.class);
-                        System.out.println("test-name" + userName);
+                    if (ds.child("email").getValue().equals(email)) {
                         userProfile = ds.child("profileURL").getValue(String.class);
-
                     }
+
                     Glide.with(imgProfilePic.getContext())
                             .load(userProfile)
+                            .circleCrop()
                             .into(imgProfilePic);
-                    break;
-
 
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UploadProfileImageActivity.this, "Something wrong happens", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        @Override
-        public void onCancelled (@NonNull DatabaseError error){
-            Toast.makeText(UploadProfileImageActivity.this, "Something wrong happens", Toast.LENGTH_LONG).show();
-        }
-    });
+    }
 
-}
+
 
     private void cameraPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

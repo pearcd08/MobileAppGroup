@@ -48,6 +48,13 @@ public class ViewAllPosts_Adapter extends FirebaseRecyclerAdapter<Post, ViewAllP
     }
 
     @Override
+    public void onBindViewHolder(@NonNull ViewAllPosts_Holder holder, int position) {
+        //holder.txt_userName.setText =
+        //holder.txt_location.setText =
+        //holder.txt_blurb.setText =
+        //holder.imgBtn_profilePic.setImageURI();
+        //holder.img_photo.setImageURI();
+
     protected void onBindViewHolder(@NonNull ViewAllPosts_Holder holder, int position, @NonNull Post model) {
         holder.txt_userName.setText(model.getUsername());
         holder.txt_location.setText(model.getLocation());
@@ -83,9 +90,14 @@ public class ViewAllPosts_Adapter extends FirebaseRecyclerAdapter<Post, ViewAllP
                     switch (menuItem.getItemId()) {
                         case R.id.menu_edit:
 
-                            //Intent intent = new Intent(view.getContext(), NewPost.class);
-                            //intent.putExtra("EDIT", position);
-                            //view.getContext().startActivity(intent);
+                            String postFullAddress = String.valueOf(FirebaseDatabase.getInstance().getReference().child("Posts")
+                                    .child(getRef(holder.getAdapterPosition()).getKey()));
+                            String[] postAddressArray = postFullAddress.split("/");
+                            String postID = postAddressArray[postAddressArray.length - 1];
+                            Intent intent = new Intent(view.getContext(), EditPost.class);
+                            intent.putExtra("postID", postID);
+                            intent.putExtra("userID", model.getUserID());
+                            view.getContext().startActivity(intent);
                             break;
 
                         case R.id.menu_delete:

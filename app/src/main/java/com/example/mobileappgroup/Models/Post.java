@@ -1,10 +1,14 @@
 package com.example.mobileappgroup.Models;
 
+import com.google.firebase.database.Exclude;
+
 public class Post {
 
 
     private String username, userID, location, blurb, imageURL, profileURL;
     Double longitude, latitude;
+    @Exclude
+    private String postID;
 
 
     public Post() {
@@ -85,6 +89,18 @@ public class Post {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getPostID() {
+        return postID;
+    }
+
+    public void setPostID(String postID) {
+        this.postID = postID;
     }
 
 }

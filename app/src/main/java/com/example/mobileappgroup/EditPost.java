@@ -100,6 +100,7 @@ public class EditPost extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (view.getId() == btn_editPost_back.getId()) {
+            startActivity(new Intent(this, ViewAllPosts.class));
             finish();
         } else if (view.getId() == btn_editPost_update.getId()) {
             HashMap<String, Object> postHashmap = new HashMap<>();

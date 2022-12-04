@@ -11,42 +11,13 @@
 
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Set Profile Image"
-        android:textAlignment="center"
-        android:textSize="32dp"
-        android:layout_marginBottom="50dp"/>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        app:cardCornerRadius="140dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="5dp">
-
-        <androidx.camera.view.PreviewView
-            android:id="@+id/preview_camera"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-        <ImageView
-            android:id="@+id/img_uploadProfileImage_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:backgroundTint="@color/black"
-            android:src="@drawable/ic_baseline_person"
-
-            />
-
-
-    </com.google.android.material.card.MaterialCardView>
-
-
+        android:layout_marginTop="30sp"
+        android:fontFamily="@font/wildyouthfont"
+        android:text="PROFILE IMAGE"
+        android:textColor="#C80D50"
+        android:textSize="48sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,9 +29,51 @@
             android:id="@+id/imgbtn_uploadProfileImage_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="200dp"
             android:src="@drawable/ic_camera"
             android:backgroundTint="#0000"/>
+
+
+        <ImageButton
+            android:id="@+id/imgbtn_uploadProfileImage_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_image_gallery"
+            android:backgroundTint="#0000"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        app:cardCornerRadius="140dp"
+        app:strokeColor="#C80D50"
+        app:strokeWidth="5dp">
+
+    <androidx.camera.view.PreviewView
+            android:id="@+id/preview_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/img_uploadProfileImage_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_person"
+
+            />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
         <ImageButton
             android:id="@+id/imgbtn_uploadProfileImage_capture"
             android:layout_width="wrap_content"
@@ -68,36 +81,32 @@
             android:src="@drawable/ic_capture"
             android:backgroundTint="#0000"/>
 
-        <ImageButton
-            android:id="@+id/imgbtn_uploadProfileImage_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/ic_image_gallery"
-            android:backgroundTint="#0000"/>
 
-    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp">
 
         <Button
             android:id="@+id/btn_uploadProfileImage_back"
-            android:layout_width="wrap_content"
+            android:layout_width="110sp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
+            android:layout_marginRight="50dp"
             android:backgroundTint="#C80D50"
+            android:textSize="16sp"
             android:text="Back" />
 
         <Button
             android:id="@+id/btn_uploadProfileImage_next"
-            android:layout_width="wrap_content"
+            android:layout_width="110sp"
             android:layout_height="wrap_content"
             android:backgroundTint="#C80D50"
+            android:textSize="16sp"
             android:text="Update" />
 
 

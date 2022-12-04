@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:text="@string/new_post"
         android:textAlignment="center"
-        android:textStyle="italic"
-        android:fontFamily="sans-serif-black"
-        android:textSize="36sp"
-        android:textColor="@color/dark_teal"/>
+        android:fontFamily="@font/wildyouthfont"
+        android:textColor="#C80D50"
+        android:textSize="64sp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +28,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera"
+            android:backgroundTint="#0000"
             android:layout_marginEnd="150dp"/>
 
         <ImageButton
             android:id="@+id/img_btn_uploadPostImage_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#0000"
             android:src="@drawable/ic_image_gallery"
             />
     </LinearLayout>
